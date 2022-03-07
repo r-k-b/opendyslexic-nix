@@ -1,5 +1,5 @@
 {
-  description = "antijingoist/open-dyslexic as a Nix Flake.";
+  description = "antijingoist/opendyslexic as a Nix Flake.";
 
   inputs = { utils.url = "github:numtide/flake-utils"; };
 
@@ -8,12 +8,12 @@
       let
         pkgs = nixpkgs.legacyPackages."${system}";
         inherit (pkgs) lib fetchzip mkShell;
-        opendyslexic = let version = "2016-06-23";
+        opendyslexic = let version = "2021-06-12";
         in fetchzip {
           name = "open-dyslexic-${version}";
 
           url =
-            "https://github.com/antijingoist/open-dyslexic/archive/20160623-Stable.zip";
+            "https://github.com/antijingoist/opendyslexic/archive/e7ac50af1aabb8cb0fbf81db105f21f81fbb5284.zip";
 
           postFetch = ''
             mkdir -p $out/share/{doc,fonts}
@@ -21,14 +21,13 @@
             unzip -j $downloadedFile \*/README.md -d $out/share/doc/open-dyslexic
           '';
 
-          sha256 = "1vl8z5rknh2hpr2f0v4b2qgs5kclx5pzyk8al7243k5db82a2cyi";
+          sha256 = "O7RHr0v6A9P3o+1Af1nKLls/Bt1n0NvNO0UP6FK8z30=";
 
           meta = with lib; {
             homepage = "https://opendyslexic.org/";
             description =
               "Font created to increase readability for readers with dyslexia";
-            license =
-              "Bitstream Vera License (https://www.gnome.org/fonts/#Final_Bitstream_Vera_Fonts)";
+            license = licenses.ofl;
             platforms = platforms.all;
             maintainers = [ maintainers.rycee ];
           };
